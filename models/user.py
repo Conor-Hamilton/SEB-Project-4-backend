@@ -1,17 +1,17 @@
 from sqlalchemy.ext.hybrid import hybrid_property
 from app import db, bcrypt
-from models.userType import UserType
-
+from associations import users_user_types
 
 class UserModel(db.Model):
-    
     __tablename__ = "users"
-    
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     password_hash = db.Column(db.Text, nullable=True)
-    user_types = db.relationship("UserType", back_populates="user")
+    user_types = db.relationship(
+        "UserType", secondary="users_user_types", back_populates="users"
+    )
 
     @hybrid_property
     def password(self):

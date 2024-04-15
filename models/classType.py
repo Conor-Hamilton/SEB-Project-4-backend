@@ -9,4 +9,4 @@ class ClassType(db.Model):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
 
-    classes = db.relationship("ClassModel", backref="class_type", lazy=True)
+    classes = db.relationship("ClassModel", backref="class_type")

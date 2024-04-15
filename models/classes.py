@@ -1,6 +1,4 @@
 from app import db
-from models.user import UserModel
-from models.classType import ClassType
 
 
 class ClassModel(db.Model):
@@ -16,6 +14,4 @@ class ClassModel(db.Model):
         db.Integer, db.ForeignKey("class_types.id"), nullable=False
     )
 
-    creator = db.relationship(
-        "UserModel", backref=db.backref("created_classes", lazy="dynamic")
-    )
+    creator = db.relationship("UserModel", backref="created_classes")

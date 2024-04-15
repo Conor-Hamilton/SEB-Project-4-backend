@@ -1,9 +1,6 @@
 from flask import Flask
-
 from flask_sqlalchemy import SQLAlchemy
-
 from flask_marshmallow import Marshmallow
-
 from flask_bcrypt import Bcrypt
 
 from config.environment import db_URI
@@ -17,6 +14,8 @@ db = SQLAlchemy(app)
 marsh = Marshmallow(app)
 bcrypt = Bcrypt(app)
 
-from controllers import users
+from models import user, userType, coach, classes, classAttendee, classType
+from controllers.users import users_controller
 
-app.register_blueprint(users.router, url_prefix="/api")
+
+app.register_blueprint(users_controller, url_prefix="/api")

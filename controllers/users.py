@@ -7,15 +7,15 @@ from marshmallow.exceptions import ValidationError
 from config.environment import SECRET
 from app import db
 from models.user import UserModel
-from serializers.user import UserSerializer
+from serializers.userSchema import UserSerializer
 
 user_serializer = UserSerializer()
 
 
-router = Blueprint("users", __name__)
+users_controller = Blueprint("users", __name__)
 
-
-@router.route("/signup", methods=["POST"])
+# creating a user
+@users_controller.route("/signup", methods=["POST"])
 def signup():
 
     try:
@@ -36,7 +36,8 @@ def signup():
         return {"message": "Something went wrong"}, HTTPStatus.INTERNAL_SERVER_ERROR
 
 
-@router.route("/login", methods=["POST"])
+# login a user
+@users_controller.route("/login", methods=["POST"])
 def login():
     now_utc = datetime.now(timezone.utc)
     credentials_dictionary = request.json
