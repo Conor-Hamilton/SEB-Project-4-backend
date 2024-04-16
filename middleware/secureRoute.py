@@ -23,6 +23,12 @@ def secure_route(route_func):
             if not user:
                 return {"message": "User not found"}, HTTPStatus.UNAUTHORIZED
 
+            g.current_user = user
+            print(
+                f"Current user in secure_route: {g.current_user.username}, Admin: {g.current_user.is_admin}, Coach: {g.current_user.is_coach}"
+            )
+            return route_func(*args, **kwargs)
+
         except jwt.ExpiredSignatureError:
             return {"message": "Token has expired"}, HTTPStatus.UNAUTHORIZED
         except jwt.InvalidTokenError:

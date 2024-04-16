@@ -13,3 +13,4 @@ class ClassesSerializer(marsh.SQLAlchemyAutoSchema):
         model = ClassModel
         load_instance = True
         include_fk = True
+        exclude = ("creator_id",)
