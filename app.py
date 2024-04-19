@@ -9,9 +9,13 @@ from config.environment import db_URI
 app = Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = db_URI
-
-CORS(app)
+if app.config["ENV"] == "production":
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": "https://11th-planet-jiujitsu.netlify.app"}},
+    )
+else:
+    CORS(app)
 db = SQLAlchemy(app)
 marsh = Marshmallow(app)
 bcrypt = Bcrypt(app)
