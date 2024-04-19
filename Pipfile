@@ -12,6 +12,7 @@ flask-bcrypt = "*"
 pyjwt = "*"
 pytest = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [dev-packages]
 
