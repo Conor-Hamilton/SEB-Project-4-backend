@@ -6,6 +6,7 @@ from serializers.classSchema import ClassesSerializer
 from middleware.secureRoute import secure_route
 from app import db
 from marshmallow.exceptions import ValidationError
+from datetime import datetime, time
 
 classes_controller = Blueprint("classes", __name__)
 class_schema = ClassesSerializer()
@@ -40,7 +41,21 @@ def create_class():
 # Getting all classes
 @classes_controller.route("/classes", methods=["GET"])
 def get_classes():
-    classes = ClassModel.query.all()
+    start_date = request.args.get("start")
+    end_date = request.args.get("end")
+
+    query = ClassModel.query
+
+    if start_date:
+        start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        query = query.filter(ClassModel.start_time >= start_date)
+
+    if end_date:
+        end_date = datetime.strptime(end_date, "%Y-%m-%d")
+        end_date_with_time = datetime.combine(end_date, time(23, 59, 59))
+        query = query.filter(ClassModel.end_time <= end_date_with_time)
+
+    classes = query.all()
     return jsonify(class_schema.dump(classes, many=True)), HTTPStatus.OK
 
 
