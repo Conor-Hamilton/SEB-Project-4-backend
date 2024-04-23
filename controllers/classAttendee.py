@@ -7,6 +7,7 @@ from app import db
 from middleware.secureRoute import secure_route
 from http import HTTPStatus
 from marshmallow.exceptions import ValidationError
+from datetime import datetime, timezone
 
 class_attendee_controller = Blueprint("class_attendees", __name__)
 class_attendee_schema = ClassAttendeeSchema()
@@ -51,3 +52,35 @@ def delete_class_attendee(id):
 def get_class_attendees(class_id):
     attendees = ClassAttendee.query.filter_by(class_id=class_id).all()
     return jsonify(class_attendee_schema.dump(attendees, many=True)), HTTPStatus.OK
+
+
+# Get all booked future classes for a user
+@class_attendee_controller.route("/class_attendees/future", methods=["GET"])
+@secure_route
+def get_future_classes():
+    current_user_id = g.current_user.id
+    future_classes = (
+        ClassAttendee.query.filter(
+            ClassAttendee.user_id == current_user_id,
+            ClassModel.start_time > datetime.now(timezone.utc),
+        )
+        .join(ClassModel)
+        .all()
+    )
+    return jsonify(class_attendee_schema.dump(future_classes, many=True)), HTTPStatus.OK
+
+
+# Get all past classes attended by a user
+@class_attendee_controller.route("/class_attendees/past", methods=["GET"])
+@secure_route
+def get_past_classes():
+    current_user_id = g.current_user.id
+    past_classes = (
+        ClassAttendee.query.filter(
+            ClassAttendee.user_id == current_user_id,
+            ClassModel.start_time <= datetime.now(timezone.utc),
+        )
+        .join(ClassModel)
+        .all()
+    )
+    return jsonify(class_attendee_schema.dump(past_classes, many=True)), HTTPStatus.OK

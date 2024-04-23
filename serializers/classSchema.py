@@ -8,6 +8,8 @@ class ClassesSerializer(marsh.SQLAlchemyAutoSchema):
     creator = fields.Nested(
         UserSerializer, only=("id", "username", "email"), many=False
     )
+    start_time = fields.DateTime(format="%Y-%m-%d %H:%M:%S")
+    description = fields.String()
 
     class Meta:
         model = ClassModel

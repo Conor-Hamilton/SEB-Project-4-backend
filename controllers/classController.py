@@ -2,6 +2,7 @@ from http import HTTPStatus
 import logging
 from flask import Blueprint, request, jsonify, g
 from models.classes import ClassModel
+from models.classAttendee import ClassAttendee
 from serializers.classSchema import ClassesSerializer
 from middleware.secureRoute import secure_route
 from app import db
@@ -90,11 +91,10 @@ def update_class(class_id):
         return {"message": "Something went wrong"}, HTTPStatus.INTERNAL_SERVER_ERROR
 
 
-# Deleting a class
 @classes_controller.route("/classes/<int:class_id>", methods=["DELETE"])
 @secure_route
 def delete_class(class_id):
-    class_ = ClassModel.query.get(class_id)
+    class_ = ClassModel.query.get_or_404(class_id)
 
     if not class_:
         return {"message": "Class not found"}, HTTPStatus.NOT_FOUND
@@ -102,11 +102,15 @@ def delete_class(class_id):
     if not g.current_user.is_admin:
         return {"message": "Unauthorized"}, HTTPStatus.UNAUTHORIZED
 
+    attendees = ClassAttendee.query.filter_by(class_id=class_id).all()
+    for attendee in attendees:
+        db.session.delete(attendee)
+
     try:
         db.session.delete(class_)
         db.session.commit()
         return "", HTTPStatus.NO_CONTENT
-
     except Exception as e:
+        db.session.rollback()  
         logging.exception("An error occurred while deleting a class.")
         return {"message": "Something went wrong"}, HTTPStatus.INTERNAL_SERVER_ERROR

@@ -37,3 +37,5 @@ def create_user_type():
 def get_user_types():
     user_types = UserType.query.all()
     return jsonify(user_type_schema.dump(user_types, many=True)), HTTPStatus.OK
+
+

@@ -15,62 +15,62 @@ with app.app_context():
 
         # Create Users
         conor = UserModel(
-            username="Conor", email="conor@11thplanet.com", password="securepassword123"
+            username="Conor", email="conor@11thplanet.com", password="%RyI5-%(vT"
         )
         coach_kavanagh = UserModel(
             username="Coach Kavanagh",
             email="coach.kavanagh@11thplanet.com",
-            password="securecoachpassword",
+            password="%RyI5-%(vT",
         )
         coach_thomas = UserModel(
             username="Coach Thomas",
             email="coach.thomas@11thplanet.com",
-            password="securecoachpassword",
+            password="%RyI5-%(vT",
         )
         alan = UserModel(
             username="Alan Customer",
             email="alan@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         robert = UserModel(
             username="Robert Customer",
             email="robert@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         chris = UserModel(
             username="Chris Customer",
             email="chris@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         dani = UserModel(
             username="Dani Customer",
             email="dani@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         josh = UserModel(
             username="Josh Customer",
             email="josh@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         kate = UserModel(
             username="Kate Customer",
             email="kate@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         emily = UserModel(
             username="Emily Customer",
             email="emily@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         michael = UserModel(
             username="Michael Customer",
             email="michael@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
         sarah = UserModel(
             username="Sarah Customer",
             email="sarah@example.com",
-            password="securecustomerpassword",
+            password="%RyI5-%(vT",
         )
 
         db.session.add_all(
@@ -206,21 +206,11 @@ with app.app_context():
             class_type_id=mma_type.id,
         )
 
-        morning_mma_2 = ClassModel(
-            title="Morning MMA",
-            description="Early bird MMA session focusing on all aspects of mixed martial arts.",
-            start_time=base_date + timedelta(days=7, hours=6),
-            end_time=base_date + timedelta(days=7, hours=7, minutes=30),
-            location="Studio 3",
-            creator_id=coach_kavanagh.id,
-            class_type_id=mma_type.id,
-        )
-
         advanced_mma = ClassModel(
             title="Advanced MMA",
             description="Advanced mixed martial arts techniques for seasoned practitioners.",
-            start_time=base_date + timedelta(days=0, hours=9),
-            end_time=base_date + timedelta(days=0, hours=10, minutes=30),
+            start_time=base_date + timedelta(days=7, hours=9),
+            end_time=base_date + timedelta(days=7, hours=10, minutes=30),
             location="Studio 3",
             creator_id=coach_kavanagh.id,
             class_type_id=mma_type.id,
@@ -229,8 +219,8 @@ with app.app_context():
         brazilian_jiu_jitsu = ClassModel(
             title="Brazilian Jiu Jitsu",
             description="Brazilian Jiu Jitsu techniques for ground fighting.",
-            start_time=base_date + timedelta(days=0, hours=12),
-            end_time=base_date + timedelta(days=0, hours=15, minutes=30),
+            start_time=base_date + timedelta(days=7, hours=12),
+            end_time=base_date + timedelta(days=7, hours=15, minutes=30),
             location="Main Studio",
             creator_id=coach_kavanagh.id,
             class_type_id=gi_jiu_jitsu_type.id,
@@ -239,8 +229,8 @@ with app.app_context():
         evening_boxing = ClassModel(
             title="Evening Boxing",
             description="Boxing techniques and drills.",
-            start_time=base_date + timedelta(days=0, hours=18),
-            end_time=base_date + timedelta(days=0, hours=19, minutes=30),
+            start_time=base_date + timedelta(days=7, hours=18),
+            end_time=base_date + timedelta(days=7, hours=19, minutes=30),
             location="Studio 1",
             creator_id=coach_kavanagh.id,
             class_type_id=striking_type.id,
@@ -249,8 +239,8 @@ with app.app_context():
         no_gi_grappling = ClassModel(
             title="No-Gi Grappling",
             description="Advanced no-gi grappling techniques.",
-            start_time=base_date + timedelta(days=1, hours=10),
-            end_time=base_date + timedelta(days=1, hours=11, minutes=30),
+            start_time=base_date + timedelta(days=8, hours=10),
+            end_time=base_date + timedelta(days=8, hours=11, minutes=30),
             location="Mat Area",
             creator_id=coach_thomas.id,
             class_type_id=grappling_type.id,
@@ -259,8 +249,8 @@ with app.app_context():
         advanced_grappling = ClassModel(
             title="Advanced Grappling",
             description="Advanced grappling techniques for experienced practitioners.",
-            start_time=base_date + timedelta(days=1, hours=8),
-            end_time=base_date + timedelta(days=1, hours=9, minutes=30),
+            start_time=base_date + timedelta(days=8, hours=8),
+            end_time=base_date + timedelta(days=8, hours=9, minutes=30),
             location="Main Studio",
             creator_id=coach_thomas.id,
             class_type_id=grappling_type.id,
@@ -269,8 +259,8 @@ with app.app_context():
         muay_thai_techniques = ClassModel(
             title="Muay Thai Techniques",
             description="Muay Thai focusing on elbows, knees, and clinch work.",
-            start_time=base_date + timedelta(days=2, hours=12),
-            end_time=base_date + timedelta(days=2, hours=13, minutes=30),
+            start_time=base_date + timedelta(days=9, hours=12),
+            end_time=base_date + timedelta(days=9, hours=13, minutes=30),
             location="Ring Area",
             creator_id=coach_kavanagh.id,
             class_type_id=kickboxing_type.id,
@@ -279,8 +269,8 @@ with app.app_context():
         advanced_judo = ClassModel(
             title="Advanced Judo",
             description="Advanced judo techniques including advanced throws and counters.",
-            start_time=base_date + timedelta(days=3, hours=11),
-            end_time=base_date + timedelta(days=3, hours=12, minutes=30),
+            start_time=base_date + timedelta(days=10, hours=11),
+            end_time=base_date + timedelta(days=10, hours=12, minutes=30),
             location="Studio 1",
             creator_id=coach_thomas.id,
             class_type_id=judo_type.id,
@@ -289,8 +279,8 @@ with app.app_context():
         judo_fundamentals = ClassModel(
             title="Judo Fundamentals",
             description="Judo fundamentals with an emphasis on practical application.",
-            start_time=base_date + timedelta(days=3, hours=14),
-            end_time=base_date + timedelta(days=3, hours=15, minutes=30),
+            start_time=base_date + timedelta(days=11, hours=14),
+            end_time=base_date + timedelta(days=11, hours=15, minutes=30),
             location="Studio 1",
             creator_id=coach_thomas.id,
             class_type_id=judo_type.id,
@@ -299,8 +289,8 @@ with app.app_context():
         wrestling_for_combat = ClassModel(
             title="Wrestling for Combat",
             description="Intensive wrestling tactics for combat sports.",
-            start_time=base_date + timedelta(days=4, hours=16),
-            end_time=base_date + timedelta(days=4, hours=17, minutes=30),
+            start_time=base_date + timedelta(days=12, hours=16),
+            end_time=base_date + timedelta(days=12, hours=17, minutes=30),
             location="Studio 2",
             creator_id=coach_kavanagh.id,
             class_type_id=wrestling_type.id,
@@ -309,8 +299,8 @@ with app.app_context():
         gi_jiu_jitsu_training = ClassModel(
             title="Gi Jiu Jitsu Training",
             description="Gi Jiu Jitsu techniques for competition.",
-            start_time=base_date + timedelta(days=5, hours=18),
-            end_time=base_date + timedelta(days=5, hours=19, minutes=30),
+            start_time=base_date + timedelta(days=13, hours=18),
+            end_time=base_date + timedelta(days=13, hours=19, minutes=30),
             location="Mat Area",
             creator_id=coach_kavanagh.id,
             class_type_id=gi_jiu_jitsu_type.id,
@@ -319,8 +309,8 @@ with app.app_context():
         cardio_kickboxing = ClassModel(
             title="Cardio Kickboxing",
             description="High-energy kickboxing session to boost stamina and fitness.",
-            start_time=base_date + timedelta(days=6, hours=6),
-            end_time=base_date + timedelta(days=6, hours=7, minutes=30),
+            start_time=base_date + timedelta(days=14, hours=6),
+            end_time=base_date + timedelta(days=14, hours=7, minutes=30),
             location="Fitness Room",
             creator_id=coach_thomas.id,
             class_type_id=cardio_type.id,
@@ -329,8 +319,8 @@ with app.app_context():
         beginner_bjj = ClassModel(
             title="Beginner BJJ",
             description="Introduction to Brazilian Jiu Jitsu for beginners.",
-            start_time=base_date + timedelta(days=6, hours=8),
-            end_time=base_date + timedelta(days=6, hours=9, minutes=30),
+            start_time=base_date + timedelta(days=14, hours=8),
+            end_time=base_date + timedelta(days=14, hours=9, minutes=30),
             location="Main Studio",
             creator_id=coach_thomas.id,
             class_type_id=gi_jiu_jitsu_type.id,
@@ -339,8 +329,8 @@ with app.app_context():
         advanced_striking = ClassModel(
             title="Advanced Striking",
             description="Advanced striking techniques including combinations and footwork.",
-            start_time=base_date + timedelta(days=8, hours=17),
-            end_time=base_date + timedelta(days=8, hours=18, minutes=30),
+            start_time=base_date + timedelta(days=15, hours=17),
+            end_time=base_date + timedelta(days=15, hours=18, minutes=30),
             location="Studio 1",
             creator_id=coach_kavanagh.id,
             class_type_id=striking_type.id,
@@ -349,8 +339,8 @@ with app.app_context():
         competitive_grappling = ClassModel(
             title="Competitive Grappling",
             description="Grappling techniques tailored for competition scenarios.",
-            start_time=base_date + timedelta(days=9, hours=19),
-            end_time=base_date + timedelta(days=9, hours=20, minutes=30),
+            start_time=base_date + timedelta(days=16, hours=19),
+            end_time=base_date + timedelta(days=16, hours=20, minutes=30),
             location="Main Studio",
             creator_id=coach_thomas.id,
             class_type_id=grappling_type.id,
@@ -359,7 +349,6 @@ with app.app_context():
         db.session.add_all(
             [
                 morning_mma,
-                morning_mma_2,
                 evening_boxing,
                 brazilian_jiu_jitsu,
                 no_gi_grappling,
