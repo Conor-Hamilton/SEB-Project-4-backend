@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_URI
 
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 db = SQLAlchemy(app)
 marsh = Marshmallow(app)
 bcrypt = Bcrypt(app)
