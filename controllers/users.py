@@ -6,12 +6,13 @@ from flask import Blueprint, request, g, jsonify
 from flask_cors import cross_origin
 from marshmallow.exceptions import ValidationError
 from config.environment import SECRET
-from app import db
+from app import db, app
 from models.user import UserModel
 from models.userType import UserType
 from serializers.userSchema import UserSerializer
 from middleware.secureRoute import secure_route
 from sqlalchemy.exc import IntegrityError
+import sys
 
 user_serializer = UserSerializer()
 users_controller = Blueprint("users", __name__)
@@ -125,17 +126,19 @@ def update_user(user_id):
 
     user_data = request.get_json()
     if "newPassword" in user_data and "confirmPassword" in user_data:
+        print(user_data)
         if user_data["newPassword"] != user_data["confirmPassword"]:
             return {"message": "Passwords do not match"}, HTTPStatus.BAD_REQUEST
         if not UserModel.validate_password_format(user_data["newPassword"]):
             return {
                 "message": "Password does not meet the required format"
             }, HTTPStatus.BAD_REQUEST
-        user_data["password"] = user_data["newPassword"]
 
     try:
         user = UserModel.query.get_or_404(user_id)
-        user = user_serializer.load(user_data, instance=user, partial=True)
+        user = user_serializer.load(
+            {"password": user_data["newPassword"]}, instance=user, partial=True
+        )
         db.session.commit()
         return user_serializer.jsonify(user), HTTPStatus.OK
     except ValidationError as e:
