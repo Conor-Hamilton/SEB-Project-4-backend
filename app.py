@@ -11,7 +11,9 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_URI
 
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(
+    app, resources={r"/api/*": {"origins": "https://11th-planet-jiujitsu.netlify.app"}}
+)
 
 db = SQLAlchemy(app)
 marsh = Marshmallow(app)
