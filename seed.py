@@ -194,7 +194,7 @@ with app.app_context():
         db.session.commit()
 
         # Create Classes
-        base_date = datetime(2024, 4, 15)
+        base_date = datetime(2024, 5, 13)
 
         morning_mma = ClassModel(
             title="Morning MMA",
